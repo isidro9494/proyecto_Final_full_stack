@@ -1,6 +1,6 @@
-const bcrypt = require('bcrypt');
-const User = require('./User');
-const TokenService = require('../middlewares/authMiddlewares');
+import bcrypt from 'bcrypt';
+import User from '../models/userModels.js'; 
+import { generateToken, verifyToken } from '../middlewares/authMiddlewares.js'; 
 
 const register = async (username, password) => {
   const user = new User({ username, password });
@@ -12,8 +12,9 @@ const login = async (username, password) => {
   if (!user || !(await bcrypt.compare(password, user.password))) {
     throw new Error('Credenciales inválidas');
   }
-  const token = TokenService.generateToken({ id: user._id });
+  const token = generateToken({ id: user._id });  // Usa generateToken correctamente
   return token;
 };
 
-module.exports = { register, login };
+export default { register, login };
+
