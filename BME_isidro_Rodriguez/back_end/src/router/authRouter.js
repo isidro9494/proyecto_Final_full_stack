@@ -1,6 +1,6 @@
-import express from 'express'; // Usa import en lugar de require
-import AuthController from '../controllers/authController.js'; // Importa el controlador
-import { authenticate } from '../middlewares/authMiddlewares.js'; // Importa el middleware
+import express from 'express'; 
+import AuthController from '../controllers/authController.js'; 
+import { authenticate } from '../middlewares/authMiddlewares.js'; 
 
 const router = express.Router();
 
