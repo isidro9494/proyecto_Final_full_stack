@@ -1,4 +1,4 @@
-import { LOAD_INFO, LOGIN } from "./LoginAction"
+import { LOAD_INFO, LOGIN ,LOAD_OUT} from "./LoginAction"
 
 
 const initialState = {
@@ -18,8 +18,13 @@ const loginReducer = (state = initialState, action) => {
             ...state,
             login: action.payload
         }
-    }else {
-        return state
+    }else if(action.type === LOAD_OUT){
+        return {
+            ...state,
+            login:action.payload,
+        }
+    }else{ 
+        return state;
     }
 }
 

@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { doLoginAction } from '../components/Login/LoginAction'
 import { useDispatch, useSelector } from 'react-redux'
 import { createUser, doLoginFetch } from '../core/services/loginFetch'
+import HomePage from './HomePage'
 
 const LoginPage = () => {
   const {
@@ -92,7 +93,7 @@ const LoginPage = () => {
             </div>
           )
       ) : (
-        <HomePage />
+        <HomePage/>
       )
     }
   </div>
