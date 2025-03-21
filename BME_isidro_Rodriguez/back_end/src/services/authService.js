@@ -12,7 +12,7 @@ const login = async (username, password) => {
   if (!user || !(await bcrypt.compare(password, user.password))) {
     throw new Error('Credenciales inválidas');
   }
-  const token = generateToken({ id: user._id });  // Usa generateToken correctamente
+  const token = generateToken({ id: user._id }); 
   return token;
 };
 

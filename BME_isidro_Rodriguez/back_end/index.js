@@ -2,7 +2,9 @@ import express from 'express';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import authRouter from './src/router/authRouter.js'; 
+import indexRouter from './src/router/indexRouter.js'; 
 import cors from 'cors';
+
 dotenv.config();
 
 const app = express();
@@ -17,6 +19,7 @@ mongoose
   .catch((err) => console.error('Error al conectar la base de datos', err));
 
 app.use('/auth', authRouter)
+app.use("/indices",indexRouter)
 
 console.log('MONGO_URI:', process.env.MONGO_URI);
 
