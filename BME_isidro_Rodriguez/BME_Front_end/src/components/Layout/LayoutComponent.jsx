@@ -3,10 +3,13 @@ import LoginPage from '../../pages/LoginPage';
 import ContactoPage from '../../pages/ContactoPage';
 import { useDispatch } from 'react-redux';
 import { doLogOutAction } from '../Login/LoginAction';
+import IbexPage from '../../pages/IbexPage';
+import DetalleComponent from '../Lista/DetalleComponent';
 
 const LayoutComponent = ({ children }) => {
   const [paginaActual, setPaginaActual] = useState('inicio');
   const dispatch = useDispatch();
+  
 
   const cambiarPagina = (pagina) => {
     setPaginaActual(pagina);
@@ -19,9 +22,13 @@ const LayoutComponent = ({ children }) => {
       case 'inicio':
         return children; 
       case 'contacto':
-        return <ContactoPage />;
+        return <ContactoPage cambiarPagina={cambiarPagina} />;
       case 'login':
         return <LoginPage/>;
+        case 'ibex':
+        return <IbexPage cambiarPagina={cambiarPagina}/>;
+        case 'detalle':
+          return <DetalleComponent cambiarPagina={cambiarPagina}/>;
       default:
         return children;
     }

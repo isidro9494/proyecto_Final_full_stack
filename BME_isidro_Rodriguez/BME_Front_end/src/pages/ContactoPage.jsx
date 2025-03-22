@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-const ContactoPage = () => {
+const ContactoPage = ({cambiarPagina}) => {
    
   return (
     <div>
@@ -32,6 +32,7 @@ const ContactoPage = () => {
         <span>telefono: </span>
         <span>620387925 </span>
       </div>
+      <button onClick={() => cambiarPagina('inicio')}>Volver al Inicio</button>
       </div>
     </div>
   )
