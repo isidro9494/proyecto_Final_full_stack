@@ -5,6 +5,7 @@ import { useDispatch } from 'react-redux';
 import { doLogOutAction } from '../Login/LoginAction';
 import IbexPage from '../../pages/IbexPage';
 import DetalleComponent from '../Lista/DetalleComponent';
+import CarteraPage from '../../pages/CarteraPage';
 
 const LayoutComponent = ({ children }) => {
   const [paginaActual, setPaginaActual] = useState('inicio');
@@ -29,6 +30,8 @@ const LayoutComponent = ({ children }) => {
         return <IbexPage cambiarPagina={cambiarPagina}/>;
         case 'detalle':
           return <DetalleComponent cambiarPagina={cambiarPagina}/>;
+          case 'cartera': 
+          return <CarteraPage cambiarPagina={cambiarPagina} />;
       default:
         return children;
     }
@@ -44,8 +47,8 @@ const LayoutComponent = ({ children }) => {
           <button onClick={() => cambiarPagina('ibex')} className="nav-button">
             IBEX
           </button>
-          <button onClick={() => cambiarPagina('acciones-bonos')} className="nav-button">
-            Acciones/Bonos
+          <button onClick={() => cambiarPagina('cartera')} className="nav-button">
+            Cartera
           </button>
           <button onClick={() => cambiarPagina('perfil')} className="nav-button">
             Perfil

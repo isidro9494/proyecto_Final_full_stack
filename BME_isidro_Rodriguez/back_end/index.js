@@ -3,6 +3,7 @@ import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import authRouter from './src/router/authRouter.js'; 
 import indexRouter from './src/router/indexRouter.js'; 
+import accionesRoutes from './src/router/accionRouter.js';
 import cors from 'cors';
 
 dotenv.config();
@@ -20,6 +21,7 @@ mongoose
 
 app.use('/auth', authRouter)
 app.use("/indices",indexRouter)
+app.use('/acciones', accionesRoutes);
 
 console.log('MONGO_URI:', process.env.MONGO_URI);
 
