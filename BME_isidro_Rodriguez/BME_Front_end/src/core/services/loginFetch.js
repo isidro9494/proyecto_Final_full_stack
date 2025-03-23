@@ -33,3 +33,42 @@ export const doLoginFetch = async (username, password) => {
     const data = await res.json(); 
     return data; 
 };
+
+
+// Función para actualizar la foto de perfil
+export const updateProfilePicture = async (file) => {
+  const formData = new FormData();
+  formData.append('profilePicture', file);
+
+  const response = await fetch('http://localhost:3000/auth/profile/picture', {
+    method: 'PUT',
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem('token')}`, 
+    },
+    body: formData,
+  });
+
+  if (!response.ok) {
+    throw new Error('Error al actualizar la foto de perfil');
+  }
+
+  return response.json();
+};
+
+// Función para actualizar la contraseña
+export const updatePassword = async (currentPassword, newPassword) => {
+  const response = await fetch('http://localhost:3000/auth/profile/password', {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${localStorage.getItem('token')}`, 
+    },
+    body: JSON.stringify({ currentPassword, newPassword }),
+  });
+
+  if (!response.ok) {
+    throw new Error('Error al actualizar la contraseña');
+  }
+
+  return response.json();
+};

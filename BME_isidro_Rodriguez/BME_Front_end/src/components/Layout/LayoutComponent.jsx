@@ -8,6 +8,9 @@ import DetalleComponent from '../Lista/DetalleComponent';
 import CarteraPage from '../../pages/CarteraPage';
 import RegistrarAccionComponent from '../Cartera/RegistrarAccionComponent';
 import ModificarAccionComponent from '../Cartera/ModificarAccionComponent';
+import PerfilPage from '../../pages/PerfilPage';
+
+
 
 const LayoutComponent = ({ children }) => {
   const [paginaActual, setPaginaActual] = useState('inicio');
@@ -36,10 +39,13 @@ const LayoutComponent = ({ children }) => {
           return <DetalleComponent cambiarPagina={cambiarPagina}/>;
           case 'cartera': 
           return <CarteraPage cambiarPagina={cambiarPagina} />;
+          case 'perfil': 
+          return <PerfilPage cambiarPagina={cambiarPagina} />;
           case 'añadirAccion': 
           return <RegistrarAccionComponent cambiarPagina={cambiarPagina} />
           case 'modificarAccion': 
           return <ModificarAccionComponent  accion={accionSeleccionada} cambiarPagina={cambiarPagina} />
+        
       default:
         return children;
     }

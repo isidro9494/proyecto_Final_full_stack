@@ -57,7 +57,8 @@ export const deleteAccion = async (id) => {
 };
 export const editarAccion = async (accion) => {
     try {
-        const response = await fetch(`http://localhost:3000/acciones/${accion.id}`, {
+        console.log("Datos enviados al backend:", accion); // Depuración
+        const response = await fetch(`http://localhost:3000/acciones/${accion._id}`, { // Usa accion._id
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
@@ -69,7 +70,9 @@ export const editarAccion = async (accion) => {
             throw new Error('Error al actualizar la accion en el backend');
         }
 
-        return await response.json(); 
+        const data = await response.json();
+        console.log("Respuesta del backend:", data); // Depuración
+        return data; 
     } catch (error) {
         console.error(error);
         throw error;

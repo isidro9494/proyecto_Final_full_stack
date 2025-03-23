@@ -1,14 +1,20 @@
-// authMiddlewares.js
-
 import jwt from 'jsonwebtoken';
 
 const SECRET_KEY = process.env.SECRET_KEY;
-const EXPIRATION_TIME = '1h';
+const ACCESS_TOKEN_EXPIRATION = '1h'; // Token de acceso expira en 1 hora
+const REFRESH_TOKEN_EXPIRATION = '7d'; // Token de refresco expira en 7 días
 
-export const generateToken = (payload) => {
-  return jwt.sign(payload, SECRET_KEY, { expiresIn: EXPIRATION_TIME });
+// Generar token de acceso
+export const generateAccessToken = (payload) => {
+  return jwt.sign(payload, SECRET_KEY, { expiresIn: ACCESS_TOKEN_EXPIRATION });
 };
 
+// Generar token de refresco
+export const generateRefreshToken = (payload) => {
+  return jwt.sign(payload, SECRET_KEY, { expiresIn: REFRESH_TOKEN_EXPIRATION });
+};
+
+// Verificar token
 export const verifyToken = (token) => {
   try {
     return jwt.verify(token, SECRET_KEY);
@@ -17,10 +23,7 @@ export const verifyToken = (token) => {
   }
 };
 
-export const refreshToken = (payload) => {
-  return generateToken(payload);
-};
-
+// Middleware de autenticación
 export const authenticate = (req, res, next) => {
   const token = req.headers.authorization?.split(' ')[1]; 
   if (!token) {
@@ -34,4 +37,3 @@ export const authenticate = (req, res, next) => {
     res.status(401).json({ error: 'Token inválido o expirado' });
   }
 };
-
