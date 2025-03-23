@@ -6,14 +6,18 @@ import { doLogOutAction } from '../Login/LoginAction';
 import IbexPage from '../../pages/IbexPage';
 import DetalleComponent from '../Lista/DetalleComponent';
 import CarteraPage from '../../pages/CarteraPage';
+import RegistrarAccionComponent from '../Cartera/RegistrarAccionComponent';
+import ModificarAccionComponent from '../Cartera/ModificarAccionComponent';
 
 const LayoutComponent = ({ children }) => {
   const [paginaActual, setPaginaActual] = useState('inicio');
+  const [accionSeleccionada, setAccionSeleccionada] = useState(null);
   const dispatch = useDispatch();
   
 
-  const cambiarPagina = (pagina) => {
+  const cambiarPagina = (pagina, accion=null) => {
     setPaginaActual(pagina);
+    setAccionSeleccionada(accion); 
   };
   const cerrarSesion = () => {
     dispatch(doLogOutAction())
@@ -32,6 +36,10 @@ const LayoutComponent = ({ children }) => {
           return <DetalleComponent cambiarPagina={cambiarPagina}/>;
           case 'cartera': 
           return <CarteraPage cambiarPagina={cambiarPagina} />;
+          case 'añadirAccion': 
+          return <RegistrarAccionComponent cambiarPagina={cambiarPagina} />
+          case 'modificarAccion': 
+          return <ModificarAccionComponent  accion={accionSeleccionada} cambiarPagina={cambiarPagina} />
       default:
         return children;
     }

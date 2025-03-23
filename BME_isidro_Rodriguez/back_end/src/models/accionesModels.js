@@ -5,8 +5,8 @@ const accionesSchema = new mongoose.Schema({
     fechaDeCompra: { type: Date, required:true},
     NumeroAcciones: { type: Number, required: true},
     Precio: { type: Number, required: true},
-    costoInversion:{ type: Number, required: true },
-    valorActual: { type: Number, required: true },
+    costoInversion:{ type: Number},
+    valorActual: { type: Number},
    
 });
 export default mongoose.model('Accion', accionesSchema);

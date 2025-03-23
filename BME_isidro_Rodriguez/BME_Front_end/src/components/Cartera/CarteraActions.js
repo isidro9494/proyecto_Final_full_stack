@@ -21,5 +21,5 @@ export const eliminarAccion = (id)=>({
 
     export const modificarAccion= (id,nuevosDatos)=>({
         type:MODIFY_ACC,
-        payload:{id:nuevosDatos},
+        payload:{id,nuevosDatos},
     })

@@ -24,7 +24,7 @@ switch(action.type){
             case MODIFY_ACC:
                 return{
                     ...state,
-                    acciones:state.acciones.map((accion)=>accion.id === action.payload.id ? action.payload : accion)
+                    acciones:state.acciones.map((accion)=>accion.id === action.payload.id ? { ...accion, ...action.payload.nuevosDatos } : accion)
                 }
                 default:
                     return state

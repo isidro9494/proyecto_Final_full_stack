@@ -18,15 +18,21 @@ export const crearAccion = async (req,res)=>{
         res.status(500).json({error:"Error al crear la accion"});
     }
 }
-export const modificaAccion = async (req,res)=>{
-    try{
-        const {id}= req.params;
-        const accionMody = await Accion.findByIdAndUpdate(id,req.body,{new:true})
-        res.status(200).json(accionMody)
-    }catch(error){
-        res.status(500).json({error:"Error al actualizar accion"});
+export const modificaAccion = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const accionExistente = await Accion.findById(id);
+
+        if (!accionExistente) {
+            return res.status(404).json({ error: "Acción no encontrada" });
+        }
+
+        const accionMody = await Accion.findByIdAndUpdate(id, req.body, { new: true });
+        res.status(200).json(accionMody);
+    } catch (error) {
+        res.status(500).json({ error: "Error al actualizar acción" });
     }
-}
+};
 
 export const eliminarAccion = async (req,res)=>{
     try{

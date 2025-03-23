@@ -1,6 +1,6 @@
 import yahooFinance from 'yahoo-finance2';
-import Index from '../models/indexModels.js';
 import mongoose from 'mongoose';
+import Index from '../models/indexModels.js';
 
 // Suprimir avisos de Yahoo Finance
 yahooFinance.suppressNotices(['yahooSurvey']);
@@ -19,62 +19,84 @@ const obtenerDatosIndice = async () => {
     const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
     for (const simbolo of simbolos) {
-        try {
-            console.log(`Obteniendo datos para: ${simbolo}`);
-            
-            // Obtener datos de Yahoo Finance
-            const resultado = await yahooFinance.quote(simbolo);
+        let intentos = 3; // Número de reintentos
+        while (intentos > 0) {
+            try {
+                console.log(`Obteniendo datos para: ${simbolo}`);
+                const resultado = await yahooFinance.quote(simbolo);
 
-            // Validar datos obtenidos
-            if (!resultado || !resultado.symbol || !resultado.regularMarketPrice) {
-                console.warn(`Datos incompletos para: ${simbolo}`);
-                continue;
+                if (!resultado || !resultado.symbol || !resultado.regularMarketPrice) {
+                    console.warn(`Datos incompletos para: ${simbolo}`);
+                    break;
+                }
+
+                const nombre = resultado.displayName || resultado.longName || resultado.shortName || 'Desconocido';
+
+                // Usar findOneAndUpdate para evitar duplicados
+                await Index.findOneAndUpdate(
+                    { simbolo: resultado.symbol },
+                    {
+                        $set: {
+                            nombre: nombre,
+                            precio: resultado.regularMarketPrice || 0,
+                            sector: resultado.sector || 'Desconocido',
+                            bpa: resultado.epsTrailingTwelveMonths || 0,
+                            per: resultado.trailingPE || 0,
+                            beneficios: resultado.netIncomeToCommon || 0,
+                            ingresos: resultado.totalRevenue || 0,
+                            capitalizacion: resultado.marketCap || 0,
+                        },
+                    },
+                    { upsert: true, new: true }
+                );
+
+                console.log(`Datos guardados para: ${simbolo}`);
+                break; // Salir del bucle de reintentos si tiene éxito
+            } catch (error) {
+                console.error(`Error al procesar ${simbolo}:`, error.message);
+                intentos--;
+                if (intentos === 0) {
+                    console.error(`No se pudo procesar ${simbolo} después de 3 intentos.`);
+                } else {
+                    await delay(5000); // Esperar 5 segundos antes de reintentar
+                }
             }
-
-            // Crear objeto con los datos
-            const nombre = resultado.displayName || resultado.longName || resultado.shortName || 'Desconocido';
-            const indice = new Index({
-                nombre: nombre,
-                simbolo: resultado.symbol,
-                precio: resultado.regularMarketPrice || 0,
-                sector: resultado.sector || 'Desconocido',
-                bpa: resultado.epsTrailingTwelveMonths || 0,
-                per: resultado.trailingPE || 0,
-                beneficios: resultado.netIncomeToCommon || 0,
-                ingresos: resultado.totalRevenue || 0,
-                capitalizacion: resultado.marketCap || 0,
-            });
-
-            // Guardar en la base de datos
-            await indice.save();
-            console.log(`Datos guardados para: ${simbolo}`);
-        } catch (error) {
-            console.error(`Error al procesar ${simbolo}:`, error.message);
         }
 
-        // Retraso entre solicitudes para evitar bloqueos
-        await delay(3000);
+        await delay(3000); // Retraso entre solicitudes
     }
 };
 
 // Conectar a MongoDB y ejecutar la función
 const main = async () => {
     try {
-        await mongoose.connect('mongodb://localhost:27017/BME');
+        await mongoose.connect('mongodb://localhost:27017/BME', {
+            useNewUrlParser: true,
+            useUnifiedTopology: true,
+        });
         console.log('Conectado a MongoDB');
 
-        await obtenerDatosIndice(); // Esperar a que todas las operaciones terminen
+        await obtenerDatosIndice(); // Ejecutar la función principal
     } catch (error) {
-        console.error('Error:', error.message);
+        console.error('Error al conectar a MongoDB:', error.message);
+        process.exit(1); // Salir del proceso si no se puede conectar
     }
 };
 
-// Ejecutar la función principal
-main();
+// Ejecutar el proceso cada 5 minutos
+const ejecutarProceso = async () => {
+    try {
+        await obtenerDatosIndice();
+        console.log('Proceso completado. Esperando para la próxima ejecución...');
+    } catch (error) {
+        console.error('Error en el proceso:', error.message);
+    }
+};
+
+// Ejecutar el proceso inmediatamente al iniciar
+ejecutarProceso();
 
 // Mantener el proceso activo
-setInterval(() => {
-    console.log('Manteniendo el proceso activo...');
-}, 1000 * 60); // Ejecutar cada minuto
+setInterval(ejecutarProceso, 1000 * 60 * 5); // Ejecutar cada 5 minutos
 
 export default { obtenerDatosIndice };

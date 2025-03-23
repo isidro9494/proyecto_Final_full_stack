@@ -1,13 +1,21 @@
 export const getAcciones = async () => {
-    const res = await fetch('http://localhost:3000/acciones')
-    const result = await res.json()
-
-    return result.donuts
-}
+    try {
+        const res = await fetch('http://localhost:3000/acciones');
+        if (!res.ok) {
+            throw new Error(`Error: ${res.status} ${res.statusText}`);
+        }
+        const result = await res.json();
+        console.log('Respuesta del backend:', result); 
+        return result; 
+    } catch (error) {
+        console.error('Error al obtener las acciones:', error);
+        return []; 
+    }
+};
 
 export const anadirAccion = async (nuevaAccion) => {
     try {
-        console.log("Datos enviados al backend:", nuevoAccion); // LOG aquí
+        console.log("Datos enviados al backend:", nuevaAccion); // Depuración
         const res = await fetch('http://localhost:3000/acciones', {
             method: 'POST',
             headers: {
@@ -21,16 +29,16 @@ export const anadirAccion = async (nuevaAccion) => {
         }
 
         const result = await res.json();
-        console.log("Respuesta del backend:", result); // LOG aquí
-        return result.donut; 
+        console.log("Respuesta del backend:", result); // Depuración
+        return result;
     } catch (error) {
-        console.error("Error al añadir una accion en fetch:", error); // LOG aquí
+        console.error("Error al añadir una acción en fetch:", error);
         throw error;
     }
 };
 
 
-export const eliminarAccion = async (id) => {
+export const deleteAccion = async (id) => {
     try {
         const res = await fetch(`http://localhost:3000/acciones/${id}`, {
             method: 'DELETE'
