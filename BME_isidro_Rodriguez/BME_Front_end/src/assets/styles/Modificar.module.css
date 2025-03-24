@@ -1,0 +1,84 @@
+/* ModificarAccionComponent.module.css */
+.container {
+    max-width: 600px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .title {
+    color: #2c3e50;
+    text-align: center;
+    margin-bottom: 2rem;
+    font-size: 1.8rem;
+  }
+  
+  .form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  
+  .formGroup {
+    display: flex;
+    align-items: center;
+  }
+  
+  .label {
+    flex: 0 0 180px;
+    font-weight: 600;
+    color: #495057;
+    margin-right: 1rem;
+  }
+  
+  .input {
+    flex: 1;
+    padding: 0.75rem;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+  }
+  
+  .input:focus {
+    border-color: #4d90fe;
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(77, 144, 254, 0.2);
+  }
+  
+  .buttonGroup {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+    margin-top: 1.5rem;
+  }
+  
+  .button {
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 4px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  .saveButton {
+    background-color: #4285f4;
+    color: white;
+  }
+  
+  .saveButton:hover {
+    background-color: #3367d6;
+  }
+  
+  .cancelButton {
+    background-color: #f1f3f4;
+    color: #3c4043;
+  }
+  
+  .cancelButton:hover {
+    background-color: #e8eaed;
+  }

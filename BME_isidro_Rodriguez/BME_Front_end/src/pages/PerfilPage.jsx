@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { updateProfilePicture, updatePassword } from '../core/services/loginFetch'; // Asegúrate de importar updatePassword
+import { updateProfilePicture, updatePassword } from '../core/services/loginFetch';
+import styles from "../assets/styles/Perfil.module.css"
 
 const PerfilPage = ({ cambiarPagina }) => {
     const [file, setFile] = useState(null);
@@ -37,44 +38,39 @@ const PerfilPage = ({ cambiarPagina }) => {
     }; // Aquí se cerró correctamente la función handleUpdatePassword
 
     return (
-        <div>
-            <h1>Perfil de Usuario</h1>
-
-            {/* Cambiar foto de perfil */}
-            <div>
-                <h2>Cambiar Foto de Perfil</h2>
-                <input type="file" onChange={handleFileChange} />
-                <button onClick={handleUpdateProfilePicture}>Actualizar Foto</button>
+        <div className={styles.container}>
+        <h1 className={styles.title}>Perfil de Usuario</h1>
+        <div className={styles.section}>
+            <h2 className={styles.sectionTitle}>Cambiar Foto de Perfil</h2>
+            <div className={styles.formGroup}>
+                <input type="file" className={styles.fileInput}onChange={handleFileChange} />
+                <button className={`${styles.button} ${styles.primaryButton}`}onClick={handleUpdateProfilePicture}>Actualizar Foto</button>
             </div>
-
-            {/* Cambiar contraseña */}
-            <div>
-                <h2>Cambiar Contraseña</h2>
-                <input
-                    type="password"
-                    placeholder="Contraseña actual"
-                    value={currentPassword}
-                    onChange={(e) => setCurrentPassword(e.target.value)}
-                />
-                <input
-                    type="password"
-                    placeholder="Nueva contraseña"
-                    value={newPassword}
-                    onChange={(e) => setNewPassword(e.target.value)}
-                />
-                <button onClick={handleUpdatePassword}>Actualizar Contraseña</button>
-            </div>
-
-            {/* Mostrar mensajes de éxito/error */}
-            {message && <p>{message}</p>}
-
-            {/* Botón para volver al inicio */}
-            <button onClick={() => cambiarPagina('inicio')} style={{ marginTop: '20px' }}>
-                Volver al Inicio
-            </button>
         </div>
-    );
-}; // Aquí se cerró correctamente el componente PerfilPage
+        <div className={styles.section}>
+            <h2 className={styles.sectionTitle}>Cambiar Contraseña</h2>
+            <div className={styles.formGroup}>
+                <label className={styles.label}>Contraseña actual:</label>
+                <input  type="password" className={styles.input} placeholder="Ingresa tu contraseña actual" value={currentPassword} onChange={(e) => setCurrentPassword(e.target.value)}/>
+            </div>
+            <div className={styles.formGroup}>
+                <label className={styles.label}>Nueva contraseña:</label>
+                <input type="password" className={styles.input} placeholder="Ingresa tu nueva contraseña" value={newPassword} onChange={(e) => setNewPassword(e.target.value)}/>
+            </div>
+            <button className={`${styles.button} ${styles.primaryButton}`}onClick={handleUpdatePassword}>Actualizar Contraseña</button>
+        </div>
+
+       
+        {message && (
+            <div className={`${styles.message} ${isError ? styles.errorMessage : styles.successMessage}`}>
+                {message}
+            </div>
+        )}
+
+        <button className={`${styles.button} ${styles.secondaryButton}`}onClick={() => cambiarPagina('inicio')}>Volver al Inicio</button>
+    </div>
+);
+};
 
 export default PerfilPage;
 

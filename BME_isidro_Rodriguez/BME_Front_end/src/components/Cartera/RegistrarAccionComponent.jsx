@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { anadirAccion } from '../../core/services/accionFetch';
 import { agregarAccion } from './CarteraActions';
+import styles from "../../assets/styles/Registrar.module.css"
 
 const RegistrarAccionComponent = ({ cambiarPagina }) => {
   const dispatch = useDispatch();
@@ -46,31 +47,31 @@ const RegistrarAccionComponent = ({ cambiarPagina }) => {
   };
 
   return (
-    <div>
-      <h1>Registro de Acción</h1>
+    <div className={styles.container}>
+      <h1 className={styles.title}>Registro de Acción</h1>
    
-      <div>
-        <label>Nombre de la Empresa:</label>
-        <input type="text" value={nombreEmpresa} onChange={(e) => setNombreEmpresa(e.target.value)} />
+      <div className={styles.formRow}>
+        <label className={styles.label}>Nombre de la Empresa:</label>
+        <input type="text"  className={styles.input} value={nombreEmpresa} onChange={(e) => setNombreEmpresa(e.target.value)} />
       </div>
-      <div>
-        <label>Fecha de Adquisición:</label>
-        <input type="date" value={fechaAdquisicion} onChange={(e) => setFechaAdquisicion(e.target.value)} />
+      <div className={styles.formRow}>
+        <label className={styles.label}>Fecha de Adquisición:</label>
+        <input type="date" className={styles.input} value={fechaAdquisicion} onChange={(e) => setFechaAdquisicion(e.target.value)} />
       </div>
-      <div>
-        <label>Número de Acciones:</label>
-        <input type="number" value={numeroAcciones} onChange={(e) => setNumeroAcciones(e.target.value)} />
+      <div className={styles.formRow} >
+        <label  className={styles.label}>Número de Acciones:</label>
+        <input type="number"  className={styles.input} value={numeroAcciones} onChange={(e) => setNumeroAcciones(e.target.value)} />
       </div>
-      <div>
-        <label>Precio por Acción:</label>
-        <input type="number" step="0.01" value={precio} onChange={(e) => setPrecio(e.target.value)} />
+      <div className={styles.formRow}>
+        <label className={styles.label}>Precio por Acción:</label>
+        <input type="number"  step="0.01"  className={styles.input} value={precio} onChange={(e) => setPrecio(e.target.value)} />
       </div>
-      <div>
+      <div className={styles.totalValue}>
         <strong>Valor Total de la Inversión:</strong> ${calcularValorTotal().toFixed(2)}
       </div>
     
-      <button onClick={handleRegistrar}>Registrar</button>
-      <button onClick={handleCancelar}>Cancelar</button>
+      <button  className={`${styles.button} ${styles.secondaryButton}`} onClick={handleRegistrar}>Registrar</button>
+      <button className={`${styles.button} ${styles.primaryButton}`} onClick={handleCancelar}>Cancelar</button>
     </div>
   );
 };

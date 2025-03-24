@@ -1,0 +1,124 @@
+/* Estilos base (Mobile First) */
+.loginContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background-color: #f5f7fa;
+    padding: 20px;
+  }
+  
+  .header {
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+  
+  .header h1 {
+    font-family: 'Montserrat', sans-serif;
+    color: #003366; /* Azul corporativo BME */
+    font-size: 2.5rem;
+    font-weight: 700;
+  }
+  
+  .header h2 {
+    font-family: 'Open Sans', sans-serif;
+    color: #333;
+    font-size: 1.5rem;
+    margin-top: 0.5rem;
+  }
+  
+  .formGroup {
+    width: 100%;
+    max-width: 400px;
+    margin-bottom: 1.5rem;
+  }
+  
+  .formGroup label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-family: 'Open Sans', sans-serif;
+    color: #555;
+    font-weight: 600;
+  }
+  
+  .formGroup input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-family: 'Roboto Mono', monospace;
+    font-size: 1rem;
+    transition: border 0.3s;
+  }
+  
+  .formGroup input:focus {
+    border-color: #003366;
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(0, 51, 102, 0.2);
+  }
+  
+  .buttonPrimary {
+    width: 100%;
+    padding: 12px;
+    background-color: #003366;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+  }
+  
+  .buttonPrimary:hover {
+    background-color: #002244;
+    transform: translateY(-2px);
+  }
+  
+  .buttonSecondary {
+    width: 100%;
+    padding: 12px;
+    background-color: transparent;
+    color: #003366;
+    border: 1px solid #003366;
+    border-radius: 6px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 1rem;
+    transition: background-color 0.3s;
+  }
+  
+  .buttonSecondary:hover {
+    background-color: rgba(0, 51, 102, 0.1);
+  }
+  
+  /* Efecto de "bolsa" (detalle realista) */
+  .tickerEffect {
+    position: relative;
+  }
+  
+  .tickerEffect::after {
+    content: "BME";
+    position: absolute;
+    right: -40px;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: #003366;
+    color: white;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    font-weight: bold;
+  }
+  
+  /* Responsive (Desktop) */
+  @media (min-width: 768px) {
+    .loginContainer {
+      padding: 40px;
+    }
+    .formGroup {
+      margin-bottom: 2rem;
+    }
+  }

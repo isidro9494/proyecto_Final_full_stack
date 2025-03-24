@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { getAcciones } from '../core/services/listaFetch';
 import { useDispatch, useSelector } from 'react-redux';
 import { loadIndex,seleccionarAcciones} from '../components/Lista/ListaActions';
+import styles from '../assets/styles/Ibex.module.css'
 const IbexPage = ({ cambiarPagina }) => {
  const{acciones} = useSelector((state)=>state.listaAccionesReducer)
  const dispatch = useDispatch();
@@ -26,29 +27,64 @@ const IbexPage = ({ cambiarPagina }) => {
         loadAccionesList();
     }, []);
   return (
-    <div>
-            <h1>Listado de Acciones</h1>
-            <button onClick={() => cambiarPagina('inicio')}>Volver al Inicio</button>
-            <div>
-                {acciones && acciones.length > 0 ? (
-                    acciones.map((accion) => (
-                        <div key={accion._id}>
-                            <p>Nombre: {accion.nombre}</p>
-                            <p>Símbolo: {accion.simbolo}</p>
-                            <p>Precio: {accion.precio}</p>
-                            <p>Sector: {accion.sector}</p>
-                            <p>BPA: {accion.bpa}</p>
-                            <p>PER: {accion.per}</p>
-                            <p>Capitalización: {accion.capitalizacion}</p>
-                            <button onClick={() => handleDetail(accion)}>Ver Detalles</button>
-                        </div>
-                    ))
-                ) : (
-                    <span>... loading</span>
-                )}
+    <div className={styles["ibex-container"]}>
+      <div className={styles["ibex-header"]}>
+        <h1 className={styles["ibex-title"]}>Listado del IBEX 35</h1>
+        <button 
+          className={styles["back-button"]} 
+          onClick={() => cambiarPagina('inicio')}
+        >
+          Volver al Inicio
+        </button>
+      </div>
+      
+      <div className={styles["actions-container"]}>
+        {acciones && acciones.length > 0 ? (
+          acciones.map((accion) => (
+            <div className={styles["stock-card"]} key={accion._id}>
+              <div className={styles["stock-header"]}>
+                <span className={styles["stock-name"]}>{accion.nombre}</span>
+                <span className={styles["stock-symbol"]}>{accion.simbolo}</span>
+              </div>
+              
+              <div className={styles["stock-price"]}>{accion.precio} €</div>
+              
+              <div className={styles["stock-detail"]}>
+                <span className={styles["detail-label"]}>Sector:</span>
+                <span className={styles["detail-value"]}>{accion.sector}</span>
+              </div>
+              
+              <div className={styles["stock-detail"]}>
+                <span className={styles["detail-label"]}>BPA:</span>
+                <span className={styles["detail-value"]}>{accion.bpa} €</span>
+              </div>
+              
+              <div className={styles["stock-detail"]}>
+                <span className={styles["detail-label"]}>PER:</span>
+                <span className={styles["detail-value"]}>{accion.per}</span>
+              </div>
+              
+              <div className={styles["stock-detail"]}>
+                <span className={styles["detail-label"]}>Capitalización:</span>
+                <span className={styles["detail-value"]}>
+                  {new Intl.NumberFormat('es-ES').format(accion.capitalizacion)} M€
+                </span>
+              </div>
+              
+              <button 
+                className={styles["detail-btn"]} 
+                onClick={() => handleDetail(accion)}
+              >
+                Ver Detalles
+              </button>
             </div>
-        </div>
-    );
+          ))
+        ) : (
+          <span className={styles["loading-text"]}>... loading</span>
+        )}
+      </div>
+    </div>
+  );
 };
 
 export default IbexPage

@@ -1,0 +1,25 @@
+/* Reset básico para móviles */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  
+  html {
+    font-size: 14px; /* Tamaño base pequeño (móvil) */
+  }
+  
+  body {
+    font-family: 'Roboto', sans-serif;
+    line-height: 1.5;
+    width: 100%;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+  
+  /* Contenedores adaptables */
+  .container {
+    width: 100%;
+    padding: 0 1rem; /* Espaciado móvil */
+    margin: 0 auto;
+  }

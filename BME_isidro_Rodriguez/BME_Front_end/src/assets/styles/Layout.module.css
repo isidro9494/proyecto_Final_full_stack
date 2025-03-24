@@ -1,0 +1,245 @@
+/* Estilos base (Mobile First) - Versión Mejorada */
+:root {
+    --primary-color: #003366;       /* Azul corporativo BME */
+    --primary-light: #3d5f8f;
+    --secondary-color: #e6a612;     /* Oro corporativo */
+    --accent-color: #00a0e1;        /* Azul claro/accent */
+    --light-bg: #f8f9fa;
+    --dark-text: #2c3e50;
+    --light-text: #ffffff;
+    --gray-border: #e0e0e0;
+    --success-color: #28a745;
+    --error-color: #dc3545;
+  }
+  
+  .container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background-color: var(--light-bg);
+  }
+  
+  .header {
+    background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+    color: var(--light-text);
+    padding: 1.2rem;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  
+  .header h1 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 2rem;
+    margin: 0;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+  }
+  
+  .nav {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.8rem;
+    width: 100%;
+    margin-top: 1rem;
+  }
+  
+  .nav-button {
+    background-color: transparent;
+    color: var(--light-text);
+    border: 2px solid var(--secondary-color);
+    border-radius: 6px;
+    padding: 0.6rem 1.2rem;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    letter-spacing: 0.5px;
+  }
+  
+  .nav-button:hover {
+    background-color: rgba(230, 166, 18, 0.1);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .main-content {
+    flex: 1;
+    padding: 1.5rem;
+    background-color: white;
+    margin: 1rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05);
+  }
+  
+  .footer {
+    background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+    color: var(--light-text);
+    padding: 2rem 1rem;
+    text-align: center;
+    margin-top: auto;
+  }
+  
+  .footer-content {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    margin-bottom: 1rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  .contact-info, .social-media {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+ /* Estilos para redes sociales - Mayor separación */
+.social-media {
+    margin: 1.5rem 0;
+}
+
+.social-links {
+    display: flex;
+    gap: 3rem; /* Separación muy amplia */
+    margin-top: 1.5rem;
+}
+
+.social-links a {
+    color: var(--light-text);
+    text-decoration: none;
+    transition: all 0.3s;
+    font-weight: 500;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.social-links a:hover {
+    color: var(--secondary-color);
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Para pantallas pequeñas puedes reducir el gap */
+@media (max-width: 768px) {
+    .social-links {
+        gap: 1.5rem;
+    }
+}
+  
+  .copyright {
+    font-size: 0.9rem;
+    opacity: 0.9;
+    margin-top: 2rem;
+    font-family: 'Open Sans', sans-serif;
+  }
+  
+  /* Estilos para HomePage */
+  .home-content {
+    text-align: center;
+    padding: 3rem 1rem;
+    background: linear-gradient(rgba(255,255,255,0.9), rgba(255,255,255,0.9)), 
+                url('https://example.com/bme-background.jpg') center/cover no-repeat;
+    border-radius: 10px;
+  }
+  
+  .home-content h1 {
+    color: var(--primary-color);
+    font-family: 'Montserrat', sans-serif;
+    margin-bottom: 1.5rem;
+    font-size: 2.5rem;
+    font-weight: 700;
+  }
+  
+  .home-content p {
+    font-family: 'Open Sans', sans-serif;
+    color: var(--dark-text);
+    line-height: 1.8;
+    font-size: 1.1rem;
+    max-width: 700px;
+    margin: 0 auto 2rem;
+  }
+  
+  /* Botón destacado */
+  .cta-button {
+    background-color: var(--secondary-color);
+    color: var(--primary-color);
+    border: none;
+    padding: 0.8rem 2rem;
+    border-radius: 6px;
+    font-weight: 700;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .cta-button:hover {
+    background-color: #ffc107;
+    transform: translateY(-3px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  }
+  
+  /* Media Queries para tablets */
+  @media (min-width: 768px) {
+    .header {
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 3rem;
+    }
+    
+    .nav {
+      justify-content: flex-end;
+      width: auto;
+      gap: 1.2rem;
+      margin-top: 0;
+    }
+    
+    .footer-content {
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      text-align: left;
+    }
+    
+    .home-content {
+      padding: 4rem 2rem;
+    }
+  }
+  
+  /* Media Queries para desktop */
+  @media (min-width: 1024px) {
+    .header {
+      padding: 1rem 4rem;
+    }
+    
+    .main-content {
+      padding: 2.5rem;
+      margin: 1.5rem auto;
+      max-width: 1200px;
+    }
+    
+    .footer {
+      padding: 2.5rem 4rem;
+    }
+    
+    .nav-button {
+      padding: 0.7rem 1.8rem;
+      font-size: 1rem;
+    }
+    
+    .home-content h1 {
+      font-size: 3rem;
+    }
+    
+    .home-content p {
+      font-size: 1.2rem;
+    }
+  }
