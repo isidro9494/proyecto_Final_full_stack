@@ -28,4 +28,6 @@ console.log('MONGO_URI:', process.env.MONGO_URI);
 app.listen(PORT, () => {
   console.log(`Servidor corriendo en http://localhost:${PORT}`);
   console.log('SECRET_KEY:', process.env.SECRET_KEY);
+
+
 });

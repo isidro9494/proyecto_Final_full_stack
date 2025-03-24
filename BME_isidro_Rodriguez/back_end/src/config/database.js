@@ -15,7 +15,7 @@ let users = [
         id: 3,
         name: 'Carlos',
         username: 'CarlosTech',
-        password: 'C@rl0s9876',
+        password: 'TuNuevaContraseña123!',
     },
     {
         id: 4,
