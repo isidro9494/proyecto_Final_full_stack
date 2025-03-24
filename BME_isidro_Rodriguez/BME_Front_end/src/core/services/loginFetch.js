@@ -36,38 +36,39 @@ export const doLoginFetch = async (username, password) => {
 
 
 // Función para actualizar la foto de perfil
-export const updateProfilePicture = async (file) => {
+export const updateProfilePicture = async (file, token) => {
   const formData = new FormData();
   formData.append('profilePicture', file);
 
   const response = await fetch('http://localhost:3000/auth/profile/picture', {
     method: 'PUT',
     headers: {
-      Authorization: `Bearer ${localStorage.getItem('token')}`, 
+      'Authorization': `Bearer ${token}` 
     },
     body: formData,
   });
 
   if (!response.ok) {
-    throw new Error('Error al actualizar la foto de perfil');
+    const errorData = await response.json().catch(() => ({}));
+    throw new Error(errorData.message || 'Error al actualizar la foto de perfil');
   }
 
   return response.json();
 };
 
-// Función para actualizar la contraseña
-export const updatePassword = async (currentPassword, newPassword) => {
+export const updatePassword = async (currentPassword, newPassword, token) => {
   const response = await fetch('http://localhost:3000/auth/profile/password', {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
-      Authorization: `Bearer ${localStorage.getItem('token')}`, 
+      'Authorization': `Bearer ${token}`
     },
     body: JSON.stringify({ currentPassword, newPassword }),
   });
 
   if (!response.ok) {
-    throw new Error('Error al actualizar la contraseña');
+    const errorData = await response.json().catch(() => ({}));
+    throw new Error(errorData.message || 'Error al actualizar la contraseña');
   }
 
   return response.json();

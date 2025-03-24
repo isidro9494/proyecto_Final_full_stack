@@ -1,12 +1,56 @@
 # React + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# Proyecto BME - Gestión de Cartera del IBEX35
 
-Currently, two official plugins are available:
+**Autor:** Isidro Rodríguez Freile  
+**Versión:** 1.0.0  
+**Última actualización:** {24/03/2025}
+**Para logearse**
+**Úsuario           Password:** 
+ - IsidroRF15       P@ssword99
+ - MariaG12         M@ria2023
+ - CarlosTech      TuNuevaContraseña123!
+ - LuciaStar        L*cia4567
+ - PedroDev         P3dr0@@2023
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🔍 Descripción
+Aplicación completa para gestión de inversiones en el IBEX35 con:
+- Registro de operaciones de compra/venta
+- Modificación de operaciones existentes
+- Seguimiento en tiempo real de posiciones
+- Cálculo automático del valor de la cartera
 
-## Expanding the ESLint configuration
+## 🛠 Tecnologías
+### Backend (Node.js - Puerto 3000)
+- Express
+- MongoDB (Docker)
+- JWT Authentication
+- Yahoo Finance API
 
-If you are developing a production application, we recommend using TypeScript and enable type-aware lint rules. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### Frontend (React - Puerto 5173)
+- React + Redux
+- CSS Modules
+- Chart.js
+
+## 🌐 Endpoints Principales
+
+### Operaciones con Acciones
+| Método | Endpoint | Descripción | Body Ejemplo |
+|--------|----------|-------------|--------------|
+| PUT    | `http://localhost:3000/acciones/:id` | Modificar acción existente | ```json { "ticker": "SAN", "cantidad": 150, "precioCompra": 3.50 }``` |
+| GET    | `http://localhost:3000/acciones/:id` | Obtener detalles de acción específica | - |
+| DELETE | `http://localhost:3000/acciones/:id` | Eliminar/venta de acción | - |
+| Post | `http://localhost:3000/acciones/` | compra de acción | - |
+
+## 💡 Ejemplo de Modificación
+Para modificar una acción existente:
+
+1. **Obtener el ID** de la acción a modificar (disponible en el listado)
+2. **Enviar request PUT**:
+
+```bash
+curl -X PUT http://localhost:3000/acciones/5f8d3b7a2c1d9e3f6a2b3c4d \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer <tu_token>" \
+  -d '{"ticker":"SAN", "cantidad":150, "precioCompra":3.50}'
+
