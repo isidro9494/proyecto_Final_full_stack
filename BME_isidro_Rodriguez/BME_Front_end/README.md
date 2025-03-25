@@ -2,6 +2,70 @@
 
 # Proyecto BME - Gestión de Cartera del IBEX35
 
+# Guía para Restaurar Backup de MongoDB
+
+Este repositorio contiene una copia de seguridad comprimida de MongoDB (`BME_backup.tar.gz`). Sigue estos pasos para restaurarla en tu entorno local.
+
+## 📥 1. Descargar y preparar el backup
+
+Clona el repositorio y extrae el archivo comprimido:
+
+```bash
+git https://github.com/isidro9494/proyecto_Final_full_stack/tree/develop
+cd proyecto
+tar -xzvf BME_backup.tar.gz
+
+## 📦 Contenido del Backup
+El archivo `BME_backup.tar.gz` contiene:
+- 4 colecciones principales:
+  - `users` (usuarios)
+  - `indices` (índices)
+  - `indexes` (índices alternativos)
+  - `actions` (acciones)
+- Archivos en formato BSON (datos) y JSON (metadatos)
+
+Al extraer, verás una carpeta BME_backup_local/BME
+users.metadata.json
+users.bson
+indices.metadata.json
+indices.bson
+indexes.metadata.json
+indexes.bson
+actions.metadata.json
+actions.bson
+
+ para restaurar las colecciones se debe ejecutar:
+
+mongorestore --db BME BME_backup_local/BME
+
+verificar si ha funcionado
+mongosh
+> show dbs
+> use BME
+> show collections
+> db.users.countDocuments()  
+> db.users.findOne() 
+
+## Guía para Restaurar Backup de Docker
+
+tener instalado docker ejecutar estos comandos:
+
+docker run --name mongo-bme -d -p 27017:27017 mongo
+
+Copia y restaura la backup
+
+docker cp BME_backup_local/BME mongo-bme:/backup
+docker exec -it mongo-bme mongorestore --db BME /backup
+
+primero :ejecutar la base de datos en mongo una vez obtenida
+
+segundo: en mi ruta ir a backend donde este el archivo index.js y hacer un node index.js
+
+tercero: ir a cd proyecto bmeFront una vez dentro ejecutar npm run dev
+
+
+
+
 **Autor:** Isidro Rodríguez Freile  
 **Versión:** 1.0.0  
 **Última actualización:** {24/03/2025}
