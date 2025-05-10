@@ -1,0 +1,157 @@
+/* Estilos generales */
+.ibex-container {
+    font-family: 'Roboto', 'Helvetica Neue', sans-serif;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f8f9fa;
+}
+
+/* Encabezado */
+.ibex-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #e0e3eb;
+}
+
+.ibex-title {
+    color: #003366;
+    font-size: 24px;
+    font-weight: 700;
+    margin: 0;
+}
+
+.back-button {
+    background-color: #003366;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.back-button:hover {
+    background-color: #002244;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Contenedor de acciones */
+.actions-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+}
+
+/* Tarjeta de acción */
+.stock-card {
+    background: white;
+    border-radius: 6px;
+    padding: 18px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    border-top: 3px solid #e6a612;
+    transition: transform 0.3s;
+}
+
+.stock-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Encabezado de tarjeta */
+.stock-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 12px;
+}
+
+.stock-name {
+    font-size: 16px;
+    font-weight: 700;
+    color: #2c3e50;
+}
+
+.stock-symbol {
+    background-color: #e6a612;
+    color: white;
+    padding: 3px 8px;
+    border-radius: 3px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+/* Precio */
+.stock-price {
+    font-size: 20px;
+    font-weight: 700;
+    margin: 10px 0;
+    color: #2c3e50;
+}
+
+/* Detalles */
+.stock-detail {
+    display: flex;
+    justify-content: space-between;
+    margin: 8px 0;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #f0f2f5;
+}
+
+.detail-label {
+    color: #6c757d;
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.detail-value {
+    color: #495057;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+/* Botón */
+.detail-btn {
+    width: 100%;
+    padding: 8px;
+    margin-top: 15px;
+    background-color: #003366;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.detail-btn:hover {
+    background-color: #002244;
+}
+
+/* Estado de carga */
+.loading-text {
+    text-align: center;
+    color: #6c757d;
+    font-style: italic;
+    padding: 30px;
+}
+
+/* Versión móvil */
+@media (max-width: 768px) {
+    .ibex-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+    
+    .actions-container {
+        grid-template-columns: 1fr;
+    }
+    
+    .back-button {
+        width: 100%;
+    }
+}
